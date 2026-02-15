@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#05070c" />
+  <title>X-MUSIC</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Splash -->
+  <div id="splash" class="splash">
+    <div class="splashLogo">
+      <div class="pulseDot"></div>
+      <h1>X-MUSIC</h1>
+      <p>Premium Streaming</p>
+    </div>
+  </div>
+
+  <!-- App Wrapper -->
+  <div id="app" class="app hidden">
+
+    <!-- Header -->
+    <header class="topHeader">
+      <div class="brand">
+        <span class="brandDot"></span>
+        <span class="brandText">X-MUSIC</span>
+      </div>
+
+      <div class="headerBtns">
+        <button class="iconBtn" id="themeToggleBtn" title="Theme"></button>
+      </div>
+    </header>
+
+    <!-- Pages -->
+    <main class="pages">
+
+      <!-- HOME -->
+      <section id="page-home" class="page active">
+        <h2 class="pageTitle">Good Morning</h2>
+        <p class="pageSub">Discover premium trending music</p>
+
+        <div class="chipTabs">
+          <button class="chip active" data-home-tab="all">All</button>
+          <button class="chip" data-home-tab="music">Music</button>
+          <button class="chip" data-home-tab="podcasts">Podcasts</button>
+          <button class="chip" data-home-tab="live">Live</button>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h3>Trending Now</h3>
+            <button class="linkBtn" id="reloadTrending">Reload</button>
+          </div>
+          <div class="rowScroll" id="trendingRow"></div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h3>Fresh & New</h3>
+            <button class="linkBtn" id="reloadFresh">Reload</button>
+          </div>
+          <div class="rowScroll" id="freshRow"></div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h3>Biggest Hits</h3>
+            <button class="linkBtn" id="reloadHits">Reload</button>
+          </div>
+          <div class="rowScroll" id="hitsRow"></div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h3>Recently Played</h3>
+            <button class="linkBtn" id="clearRecentBtn">Clear</button>
+          </div>
+          <div class="list" id="recentList"></div>
+        </div>
+
+      </section>
+
+      <!-- SEARCH -->
+      <section id="page-search" class="page">
+        <h2 class="pageTitle">Search</h2>
+
+        <div class="searchBox">
+          <span class="searchIcon">🔍</span>
+          <input id="searchInput" type="text" placeholder="Search songs, artists..." autocomplete="off" />
+          <button id="searchClear" class="clearBtn">✕</button>
+        </div>
+
+        <div id="searchResults" class="list"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="page-profile" class="page">
+        <h2 class="pageTitle">Profile</h2>
+
+        <div class="card">
+          <h3>Liked Songs</h3>
+          <div id="likedList" class="list"></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="page-settings" class="page">
+        <h2 class="pageTitle">Settings</h2>
+
+        <div class="settingsGroup">
+          <div class="settingRow">
+            <span>Theme</span>
+            <button id="themeToggle" class="toggleBtn">Dark</button>
+          </div>
+
+          <div class="settingRow">
+            <span>Volume</span>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" />
+          </div>
+
+          <div class="settingRow">
+            <span>Autoplay Next</span>
+            <button id="autoNextBtn" class="toggleBtn">ON</button>
+          </div>
+
+          <div class="settingRow">
+            <span>Shuffle</span>
+            <button id="shuffleBtn" class="toggleBtn">OFF</button>
+          </div>
+
+          <div class="settingRow">
+            <span>Repeat</span>
+            <button id="repeatBtn" class="toggleBtn">OFF</button>
+          </div>
+
+          <div class="settingRow">
+            <span>Clear Cache</span>
+            <button id="clearCacheBtn" class="dangerBtn">Clear</button>
+          </div>
+
+          <div class="settingRow">
+            <span>Admin Telegram</span>
+            <button id="copyAdminBtn" class="copyBtn">Copy ID</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- MINI PLAYER -->
+    <div id="miniPlayer" class="miniPlayer hidden">
+      <div class="miniLeft">
+        <img id="miniCover" src="" class="miniCover" />
+        <div class="miniInfo">
+          <div id="miniTitle" class="miniTitle">Not Playing</div>
+          <div id="miniArtist" class="miniArtist">---</div>
+        </div>
+      </div>
+
+      <div class="miniBtns">
+        <button id="miniLikeBtn" class="miniIconBtn"></button>
+        <button id="miniPlayBtn" class="miniPlayBtn"></button>
+      </div>
+    </div>
+
+    <!-- BIG PLAYER -->
+    <div id="bigPlayer" class="bigPlayer hidden">
+      <div class="bigTop">
+        <button id="bigCloseBtn" class="bigIconBtn"></button>
+        <div class="bigTopText">
+          <div class="smallTxt">PLAYING FROM</div>
+          <div class="bigTxt">TRENDING CHARTS</div>
+        </div>
+        <button id="bigMenuBtn" class="bigIconBtn"></button>
+      </div>
+
+      <div class="bigArtWrap">
+        <img id="bigCover" class="bigCover" src="" />
+      </div>
+
+      <div class="bigInfo">
+        <div id="bigTitle" class="bigTitle">---</div>
+        <div class="bigInfoRow">
+          <div id="bigArtist" class="bigArtist">---</div>
+          <button id="bigLikeBtn" class="bigLikeBtn"></button>
+        </div>
+      </div>
+
+      <div class="seekWrap">
+        <div id="seekBar" class="seekBar">
+          <div id="seekFill" class="seekFill"></div>
+        </div>
+        <div class="timeRow">
+          <span id="currentTime">0:00</span>
+          <span id="durationTime">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="shuffleToggle" class="controlBtn"></button>
+        <button id="bigPrevBtn" class="controlBtn"></button>
+        <button id="bigPlayBtn" class="bigPlayBtn"></button>
+        <button id="bigNextBtn" class="controlBtn"></button>
+        <button id="repeatToggle" class="controlBtn"></button>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottomNav">
+      <button id="navHome" class="navBtn active"></button>
+      <button id="navSearch" class="navBtn"></button>
+      <button id="navProfile" class="navBtn"></button>
+      <button id="navSettings" class="navBtn"></button>
+    </nav>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
